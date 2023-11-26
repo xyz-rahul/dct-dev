@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', filename='style.css')}}"
+        />
+        <script
+            src="{{url_for('static', filename='script.js')}}"
+            defer
+        ></script>
+    </head>
+    <body>
+        <div class="">
+            <div class="tab">
+                <button class="encode-tab-button" onclick="openEncode()">
+                    Encode
+                </button>
+                <button class="decode-tab-button" onclick="openDecode()">
+                    Decode
+                </button>
+            </div>
+
+            <div id="encode-form" style="display: block">
+                <h2>ENCODE</h2>
+                <form
+                    method="POST"
+                    action="/encode"
+                    enctype="multipart/form-data"
+                >
+                    <h3>Write message</h3>
+                    <textarea id="message" name="message" rows="8" name="message"></textarea>
+                    <br />
+                    <label for="encode-image">Select an image:</label>
+                    <br />
+                    <input
+                        type="file"
+                        id="encode-image"
+                        name="image"
+                        accept="image/*"
+                    />
+                    <br />
+
+                    <br />
+
+                    <button type="submit">Encode</button>
+                </form>
+            </div>
+
+            <div id="decode-form" style="display: none">
+                <h2>DECODE</h2>
+                <form
+                    method="POST"
+                    action="/decode"
+                    enctype="multipart/form-data"
+                >
+                    <label for="decode-image">Select an image:</label>
+                    <br />
+                    <input
+                        type="file"
+                        id="decode-image"
+                        name="image"
+                        accept="image/*"
+                    />
+                    <br />
+                    <button type="submit">Decode</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
