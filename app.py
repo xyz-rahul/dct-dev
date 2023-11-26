@@ -1,6 +1,5 @@
 from flask import Flask,request,send_file, render_template, send_from_directory, jsonify
 from werkzeug.utils import secure_filename
-import os
 import cv2
 import numpy as np
 from io import BytesIO
@@ -41,14 +40,11 @@ def file_encode():
     uploaded_image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
 
-    # f.save(os.path.join(app.config['UPLOAD'], filename))
-    # return send_from_directory(app.config['UPLOAD'], filename)
     # ENCODE
 
     try:
         # Input for the image file (can still use the original code)
         original_image_file = filename  # You can also use input("Enter the name of the file with extension: ")
-        # dct_img = cv2.imread(original_image_file, cv2.IMREAD_UNCHANGED)
 
         # Continue with the encoding process
         dct_img_encoded = DCT().encode_image(uploaded_image, message)
@@ -69,7 +65,6 @@ def file_encode():
             )
         else:
             return "Error encoding image."
-        # return send_from_directory(directory=app.config['UPLOAD'], filename=dct_encoded_image_file)
 
     except Exception as e:
         return jsonify(error=f"An error occurred: {str(e)}")
@@ -94,7 +89,7 @@ def file_decode():
         msg = DCT().decode_image(uploaded_image)
 
         print("secret: ",msg)
-     # Pass the decoded message to the template
+        # Pass the decoded message to the template
         return render_template('index.html', decoded_message=msg, error_message=None)
 
     except Exception as e:

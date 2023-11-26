@@ -16,9 +16,10 @@ body {
     color: white;
     border: none;
     padding: 1rem;
-    margin: 0.25rem;
+    font-size: larger;
+    font-weight: 500;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 0;
 }
 
 .tab button:hover {
@@ -28,7 +29,6 @@ body {
 form {
     background-color: #ffffff;
     padding: 1rem;
-    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 1rem;
 }
