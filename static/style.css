@@ -67,3 +67,7 @@ button {
 button:hover {
     background-color: #005c99; /* Slightly darker blue on hover */
 }
+
+.decode-msg {
+    padding: 1rem;
+}

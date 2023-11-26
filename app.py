@@ -15,11 +15,11 @@ def index():
     try:
         # Your existing logic for index route goes here
 
-        return render_template('index.html', error_message=None)
+        return render_template('index.html',decoded_message=None, error_message=None)
 
     except Exception as e:
         error_message = f"An error occurred: {str(e)}"
-        return render_template('index.html', error_message=error_message)
+        return render_template('index.html',decoded_message=None, error_message=error_message)
 
 
 upload = ''
@@ -27,7 +27,7 @@ app.config['UPLOAD'] = upload
 
 
 @app.route('/encode', methods=['POST'])
-def file_upload():
+def file_encode():
     message = request.form.get('message')
     print("messsss ",message)
     f = request.files['image']
@@ -53,8 +53,7 @@ def file_upload():
         # Continue with the encoding process
         dct_img_encoded = DCT().encode_image(uploaded_image, message)
         dct_encoded_image_file = "dct_" + filename
-        cv2.imwrite(dct_encoded_image_file, dct_img_encoded)
-        print("Encoding completed successfully.")
+
         success, encoded_img = cv2.imencode('.png',dct_img_encoded)
         # send_file(as_attachment=True,download_name='dct_babylon.png')
         if success:
@@ -72,8 +71,6 @@ def file_upload():
             return "Error encoding image."
         # return send_from_directory(directory=app.config['UPLOAD'], filename=dct_encoded_image_file)
 
-    except FileNotFoundError:
-        print("File not found. Please check the file paths.")
     except Exception as e:
         return jsonify(error=f"An error occurred: {str(e)}")
 
@@ -97,11 +94,12 @@ def file_decode():
         msg = DCT().decode_image(uploaded_image)
 
         print("secret: ",msg)
-        return "<p>Hello, World!</p>"
+     # Pass the decoded message to the template
+        return render_template('index.html', decoded_message=msg, error_message=None)
 
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        return "<p>Hello, World!</p>"
+        error_message = f"An error occurred: {str(e)}"
+        return render_template('index.html', decoded_message=None, error_message=error_message)
 
     
 

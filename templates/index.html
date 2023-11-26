@@ -24,6 +24,14 @@
                 </button>
             </div>
 
+            <div class="decode-msg">
+                {% if decoded_message %}
+                <h2>Decoded Message:</h2>
+                <p>{{ decoded_message }}</p>
+                {% endif %} {% if error_message %}
+                <p>Error: {{ error_message }}</p>
+                {% endif %}
+            </div>
             <div id="encode-form" style="display: block">
                 <h2>ENCODE</h2>
                 <form
@@ -32,7 +40,12 @@
                     enctype="multipart/form-data"
                 >
                     <h3>Write message</h3>
-                    <textarea id="message" name="message" rows="8" name="message"></textarea>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="8"
+                        name="message"
+                    ></textarea>
                     <br />
                     <label for="encode-image">Select an image:</label>
                     <br />
